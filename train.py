@@ -80,7 +80,7 @@ def main(args):
             criterion=criterion, 
             optimizer=optimizer, 
             epoch=epoch, 
-            logger=logger, log_freq=args.log_freq, use_closure=(args.opt[:4] == 'sam-' or args.opt[:4] == 'ssam'), 
+            logger=logger, log_freq=args.log_freq, use_closure=(args.opt[:3] == 'sam' or args.opt[:5] == 'vasso'),
         )
         lr_scheduler.step(epoch)
         val_stats = evaluate(model, val_loader)

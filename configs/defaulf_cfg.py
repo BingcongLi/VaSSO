@@ -59,12 +59,6 @@ class default_parser:
         parser = argparse.ArgumentParser(add_help=False)
         parser.add_argument('--rho', type=float, default=0.05, help="Perturbation intensity of SAM type optims.")
         parser.add_argument('--theta', type=float, default=0.9, help='Moving average for VASSO')
-        # parser.add_argument('--sparsity', type=float, default=0.2, help="The proportion of parameters that do not calculate perturbation.")
-        # parser.add_argument('--update_freq', type=int, default=5, help="Update frequency (epoch) of sparse SAM.")
-        # parser.add_argument('--num_samples', type=int, default=1024, help="Number of samples to compute fisher information. Only for `ssam-f`.")
-        # parser.add_argument('--drop_rate', type=float, default=0.5, help="Death Rate in `ssam-d`. Only for `ssam-d`.")
-        # parser.add_argument('--drop_strategy', type=str, default='gradient', help="Strategy of Death. Only for `ssam-d`.")
-        # parser.add_argument('--growth_strategy', type=str, default='random', help="Only for `ssam-d`.")
         return parser
 
     def lr_scheduler_parser(self):
