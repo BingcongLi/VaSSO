@@ -2,12 +2,13 @@
 
 
 This repo implements NeurIPS 2023 paper 
-["Enhancing Sharpness-Aware Optimization Through Variance Suppression."](https://arxiv.org/abs/2309.15639)
+["Enhancing Sharpness-Aware Optimization Through Variance Suppression"](https://arxiv.org/abs/2309.15639)
 in pytorch. The code is built on top of [this repo](https://github.com/Mi-Peng/Sparse-Sharpness-Aware-Minimization).
 
-VaSSO is a general approach to improve generalization of sharpness-aware minimization (SAM) for training deep neural networks. 
-This is achieved by refined optimization for inner maximization to promote improved sharpness measure. 
-The test accuracy of VaSSO on CIFAR10 and CIFAR100 can be found in the figure below.
+VaSSO is a general approach to further improve generalization of sharpness-aware minimization (SAM) for training deep neural networks. 
+This is achieved by refined optimization for inner maximization to promote more stable sharpness estimate. 
+
+As an illustrative example, the test accuracy of VaSSO on CIFAR10 and CIFAR100 can be found in the figure below.
 
 
 ![avatar](./assets/fig1.png)
@@ -44,28 +45,28 @@ conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit
 
 ### Useful config
 
-The configs can be found in `configs/default_cfg.py`. Some important ones are listed below。
+The configs can be found in `configs/default_cfg.py`. Some important ones are listed below.
 
-- `--opt`. The optimizer to use, e.g., `--sgd` for SGD, `--sam-sgd` for SAM with SGD as base optimizer, `vasso-adam` for VaSSO with adam as base optimizer.
-- `--dataset`. The dataset for training, choices = [`CIFAR10_base`, `CIFAR10_cutout`, `CIFAR100_base`, `CIFAR100_cutout`, `ImageNet_base`].
+- `--opt`. The optimizer to use, e.g., `--sgd` for SGD, `--sam-sgd` for SAM with base optimizer SGD, `vasso-adam` for VaSSO with base optimizer ADAM.
+- `--dataset`. The dataset for training, choices = [`CIFAR10_cutout`, `CIFAR100_cutout`, `ImageNet_base`].
 - `--model`. The model to be trained, e.g., `resnet18`, `wideresnet28x10`.
 - `--rho`. The perturbing radius for SAM, e.g., `--rho 0.1`.
 - `--theta`. The hyperparameter of moving average for VaSSO, e.g., `--theta 0.9`.
 
 ### Training
 
-You can simply run
+As an easy start, you can run the command below to train wideresnets.
 ```
 bash train.sh
 ```
 
-or customize the command line. For example, if you hope to train Resnet18 on CIFAR10 with SGD:
+You can also customize the command line. For example, if you hope to train a Resnet18 on CIFAR10 with SGD:
 
 ```bash
 python train.py --model resnet18 --dataset CIFAR10_cutout --datadir [your path to dataset] --opt sgd --lr 0.05 --weight_decay 5e-4 --seed [how about 3107]
 ```
 
-Try out training a ResNet18 on CIFAR10 with VaSSO.
+Try out a ResNet18 on CIFAR10 trained with VaSSO:
 
 ```bash
 python train.py --model resnet18 --dataset CIFAR10_cutout --datadir [your path to dataset] --opt vasso-sgd --weight_decay 1e-3  --seed [how about 3107]
